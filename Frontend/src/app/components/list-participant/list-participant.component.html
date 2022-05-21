@@ -1,0 +1,164 @@
+<div class="container " *ngIf="showUserBoard">
+  <hr class="hr">
+  <h2 class="text-center">Liste des participants</h2>
+  <hr class="hr">
+  <div class="form-group">
+
+      <input type="text" style=" border-left: 5px solid #1A5276; border-color: #1A5276;" class="form-control" placeholder="Chercher" [(ngModel)]="term">
+
+  </div>
+  <div class="row">
+    <div class="col col-lg-4" *ngFor="let participant of participants| filter:term ">
+      <div class="card">
+        <div class="card-body">
+          <img src="../../../../assets/avatar2.png">
+          <br>
+          <h5 class="card-title">{{participant.nom}} {{participant.prenom}}</h5>
+
+          <!-- <h5 class="card-title"  *ngIf="(participant.id == part.id)">{{part.nom}} </h5> -->
+
+          <p class="card-text"> <b>E-Mail :</b> {{participant.email}} </p>
+          <p class="card-text"> <b>Téléphone :</b> {{participant.tel}} </p>
+
+          <p class="card-text"><b>Type :</b> {{participant.type}} </p>
+
+          <div class="card-text" *ngIf="(participant.type == 'internationale')">
+            <p class="card-text"><b> Pays :</b> {{participant.nom_pays}} </p>
+          </div>
+
+          <div class="card-text" *ngIf="(participant.type == 'nationale')">
+            <p class="card-text"><b> Organisme :</b> {{participant.nom_organisme}} </p>
+          </div>
+
+          <br>
+          <p class="card-text"><b> Profil :</b> {{participant.libelle_profil}} </p>
+
+          <p class="card-text" *ngIf="participant.sessions"><b> Lieu et date début des sessions associées :</b> </p>
+          <li class="t" *ngFor="let session of participant.sessions">{{session.lieu}} ({{session.date_debut}}) </li>
+        </div>
+
+        <div class="card-footer">
+          <div class="row">
+            <div class="edit" (click)="openModal(editProfileModal, participant)"> <i class="fa fa-edit"
+                aria-hidden="true"></i></div>
+            <div (click)="supprimer(participant.id_profil,participant.id)" class="trash"> <i class="fa fa-trash"
+                aria-hidden="true"></i></div>
+          </div>
+        </div>
+        <ng-template #editProfileModal let-modal>
+          <div class="modal-header">
+            <h5 class="modal-title" id="editProfileLabel">MODIFIER PARTICIPANT</h5>
+            <button type="button" class="close" (click)="modal.dismiss()" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <div class="modal-body">
+            <form [formGroup]="editParticipantForm" (ngSubmit)="onSubmit(participant.id)">
+              <div class="form-row">
+                <div class="form-group  col-6">
+                  <label for="nom" class="lab">Nom :</label>
+                  <input type="text" name="nom" id="nom" formControlName="nom" class="form-control">
+                  <div *ngIf="nom?.touched">
+                    <small *ngIf="nom?.errors?.required" class="text-danger">Ce champ est obligatoire</small>
+                  </div>
+                </div>
+                <div class="form-group   col-6">
+                  <label for="prenom" class="lab">Prénom :</label>
+                  <input type="text" name="prenom" id="prenom" formControlName="prenom" class="form-control">
+                  <div *ngIf="prenom?.touched">
+                    <small *ngIf="prenom?.errors?.required" class="text-danger">Ce champ est obligatoire</small>
+                  </div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-6 ">
+                  <label for="email" class="lab">E-Mail :</label>
+                  <input type="text" name="email" id="email" formControlName="email" class="form-control">
+                  <div *ngIf="email?.touched && email?.invalid">
+                    <small *ngIf="email?.errors?.required" class="text-danger">Ce champ est obligatoire<br></small>
+                    <small *ngIf="email?.errors?.email" class="text-danger"> L'Email est invalide<br></small>
+                  </div>
+                </div>
+                <div class="form-group col-6 ">
+                  <label for="tel" class="lab">Téléphone :</label>
+                  <input type="text" name="tel" id="tel" formControlName="tel" class="form-control">
+                  <div *ngIf="tel?.touched && tel?.invalid">
+                    <small *ngIf="tel?.errors?.required" class="text-danger">Ce champ est obligatoire<br></small>
+                    <small *ngIf="tel?.errors?.pattern" class="text-danger"> Le tel est invalide<br></small>
+                    <small *ngIf="tel?.errors?.minlength" class="text-danger">Le tel doit contenir au moins 8
+                      caractères</small>
+                    <small *ngIf="tel?.errors?.maxlength" class="text-danger">Le tel doit contenir au maximum 8
+                      caractères </small>
+                  </div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-6 ">
+                  <label for="type" class="lab">Type :</label>
+                  <br>
+                  <select class="  form-select " name="type" id="type" formControlName="type" class="form-control"
+                    (change)="selectChangeHandlerType($event)">
+                    <option>Choisir un type</option>
+                    <option value="nationale">Nationale</option>
+                    <option value="internationale">Internationale</option>
+                  </select>
+                  <div *ngIf="type?.touched">
+                    <small *ngIf="type?.errors?.required" class="text-danger">Ce champ est obligatoire</small>
+                  </div>
+                </div>
+                <div class="form-group col-6" *ngIf="type?.value=='nationale'">
+                  <label for="organisme" class="lab">Organisme :</label>
+                  <br>
+                  <select class="form-select " name="organisme" id="organisme" formControlName="organisme"
+                    class="form-control" (change)="selectChangeHandlerOrganisme($event)">
+                    <option [selected]=true disabled>Choisir un organisme</option>
+                    <option value="{{organisme.id}}" *ngFor="let organisme of organismes">{{organisme.libelle}}</option>
+                  </select>
+                  <div *ngIf="organisme?.touched">
+                    <small *ngIf="organisme?.errors?.required" class="text-danger">Ce champ est obligatoire</small>
+                  </div>
+                </div>
+                <div class="form-group col-6" *ngIf="type?.value=='internationale'">
+                  <label for="pays" class="lab">Pays :</label>
+                  <br>
+                  <select class="form-select " name="pays" id="pays" formControlName="pays" class="form-control"
+                    (change)="selectChangeHandlerPays($event)">
+                    <option [selected]=true disabled>Choisir un pays</option>
+                    <option value="{{pays.id}}" *ngFor="let pays of allPays">{{pays.nom}}</option>
+                  </select>
+                  <div *ngIf="pays?.touched">
+                    <small *ngIf="pays?.errors?.required" class="text-danger">Ce champ est obligatoire</small>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group ">
+                <label for="profil" class="lab">Profil :</label>
+                <select class="form-select " name="profil" id="profil" formControlName="profil" class="form-control"
+                  (change)="selectChangeHandlerProfil($event)">
+                  <option [selected]=true disabled>Choisir un profil</option>
+                  <option value="{{profil.id}}" *ngFor="let profil of profils">{{profil.libelle}}</option>
+                </select>
+                <div *ngIf="profil?.touched">
+                  <small *ngIf="profil?.errors?.required" class="text-danger">Ce champ est obligatoire</small>
+                </div>
+              </div>
+              <div class="modal-footer">
+
+                <button type="submit" class="btn btn1" [disabled]="!editParticipantForm.valid" >ENREGISTRER</button>
+                <button type="button"  class="btn btn-danger" (click)="modal.dismiss()">FERMER</button>
+
+              </div>
+            </form>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="!showUserBoard">
+  <!-- <app-page404></app-page404> -->
+
+  <meta http-equiv="refresh" content="0; url=http://localhost:4200/Page404">
+</div>

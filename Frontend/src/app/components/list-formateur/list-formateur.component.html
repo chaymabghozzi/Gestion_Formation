@@ -1,0 +1,127 @@
+<div class="container " *ngIf="showUserBoard">
+  <hr class="hr">
+  <h2 class="text-center">Liste des formateurs</h2>
+  <hr class="hr">
+  <br>
+    <div class="form-group">
+        <input type="text" class="form-control" style=" border-left: 5px solid #591a76; border-color: #591a76;" placeholder="Chercher" [(ngModel)]="term">
+    </div>
+  <div class="row">
+    <div class="col col-lg-4" *ngFor="let formateur of formateurs| filter:term">
+      <div class="card">
+        <div class="card-body">
+          <img src="../../../../assets/avatar.png">
+          <br>
+          <h5 class="card-title">{{formateur.nom}} {{formateur.prenom}}</h5>
+          <p class="card-text"> <b>E-Mail :</b> {{formateur.email}} </p>
+          <p class="card-text"> <b>Téléphone :</b> {{formateur.tel}} </p>
+          <p class="card-text"><b>Type :</b> {{formateur.type}} </p>
+          <p class="card-text"><b> Organisme :</b> {{formateur.libelle}} </p>
+        </div>
+        <div class="card-footer">
+          <div class="row">
+            <div class="edit" (click)="openModal(editFormateurModal, formateur)"> <i class="fa fa-edit"
+                aria-hidden="true"></i></div>
+            <!-- <button type="button" class="btn btn-primary" (click)="openModal(editProfileModal, formateur)">Edit</button> -->
+            <div (click)="supprimer(formateur.id,formateur.id_organisme)" class="trash"> <i class="fa fa-trash"
+                aria-hidden="true"></i></div>
+          </div>
+        </div>
+        <ng-template #editFormateurModal let-modal>
+          <div class="modal-header">
+            <h5 class="modal-title" id="editFormateurModal">Modifier Formateur</h5>
+            <button type="button" class="close" (click)="modal.dismiss()" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <div class="modal-body">
+            <form [formGroup]="editFormateurForm" (ngSubmit)="onSubmit(formateur.id)">
+              <div class="form-group row">
+                <label for="nom" class="col-sm-4 col-form-label">Nom : </label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control" formControlName="nom" id="nom">
+                  <div *ngIf="nom?.touched">
+                    <small *ngIf="nom?.errors?.required" class="text-danger">Ce champ est obligatoire</small>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="prenom" class="col-sm-4 col-form-label">Prénom : </label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control" formControlName="prenom" id="prenom">
+                  <div *ngIf="prenom?.touched">
+                    <small *ngIf="prenom?.errors?.required" class="text-danger">Ce champ est obligatoire</small>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="email" class="col-sm-4 col-form-label">E-Mail : </label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control" formControlName="email" id="email">
+                  <div *ngIf="email?.touched && email?.invalid">
+                    <small *ngIf="email?.errors?.required" class="text-danger">Ce champ est obligatoire<br></small>
+                    <small *ngIf="email?.errors?.email" class="text-danger"> L'Email est invalide<br></small>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="tel" class="col-sm-4 col-form-label">Téléphone : </label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control" formControlName="tel" id="tel">
+                  <div *ngIf="tel?.touched && tel?.invalid">
+                    <small *ngIf="tel?.errors?.required" class="text-danger">Ce champ est obligatoire<br></small>
+                    <small *ngIf="tel?.errors?.pattern" class="text-danger"> Le tel est invalide<br></small>
+                    <small *ngIf="tel?.errors?.minlength" class="text-danger">Le tel doit contenir au moins 8
+                      caractères</small>
+                    <small *ngIf="tel?.errors?.maxlength" class="text-danger">Le tel doit contenir au maximum 8
+                      caractères </small>
+                  </div>
+                </div>
+              </div>
+              <div class="form-groupe row">
+               
+                <label for="type" class="lab" class="col-sm-4 col-form-label">Type :</label>
+                <div class="col-sm-8">
+                  <select class=" form-select " name="type" id="type" formControlName="type" class="form-control"
+                    (change)="selectChangeHandlerType($event)">
+                    <option>Choisir un type</option>
+                    <option value="interne">Interne</option>
+                    <option value="externe">Externe</option>
+                  </select>
+                  <div *ngIf="type?.touched">
+                    <small *ngIf="type?.errors?.required" class="text-danger">Ce champ est obligatoire</small>
+                  </div>
+                </div>
+              </div>
+              <br>
+              <div class="form-group row">
+                <label for="organisme" class="col-sm-4 col-form-label">Organisme : </label>
+                <div class="col-sm-8">
+                  <select class="form-select " name="organisme" id="organisme" formControlName="organisme"
+                    class="form-control" (change)="selectChangeHandlerOrganisme($event)">
+                    <option value="{{organisme.id}}" *ngFor="let organisme of organismes">{{organisme.libelle}}
+                    </option>
+                  </select>
+                  <div *ngIf="organisme?.touched">
+                    <small *ngIf="organisme?.errors?.required" class="text-danger">Ce champ est obligatoire</small>
+                  </div>
+                </div>
+              </div>
+
+              <div class="modal-footer">
+                <button type="submit" class="btn btn1"  [disabled]="!editFormateurForm.valid">ENREGISTRER</button>
+                <button type="button" class="btn btn-danger" (click)="modal.dismiss()">FERMER</button>
+              </div>
+            </form>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="!showUserBoard" >
+  <!-- <app-page404></app-page404> -->
+  
+  <meta http-equiv="refresh" content="0; url=http://localhost:4200/Page404">
+</div>

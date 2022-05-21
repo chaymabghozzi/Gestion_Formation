@@ -1,0 +1,95 @@
+<nav class="navbar navbar-expand-sm  navbar-dark" *ngIf="isLoggedIn">
+  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;
+
+  <div class="centre">
+  <ul class="navbar-nav" *ngIf="showUserBoard"  >
+   
+    <li class="nav-item">
+      
+      <div class="dropdown">
+       
+        <button class="m-1 btn btn-outline-dark" style="display: block; margin: 0 auto;">
+          Gestion Formations
+        </button>
+        <div class="dropdown-content">
+          <a href="/addFormation">Nouvelle formation</a>
+          <a href="/domaines">Liste domaines</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="m-1 btn btn-outline-dark" style="display: block; margin: 0 auto;">
+          Gestion Sessions de formatin
+        </button>
+        <div class="dropdown-content">
+          <a href="/addSession">Nouvelle session de formation</a>
+          <a href="/listSessions">Liste sessions de formation</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="m-1 btn btn-outline-dark"  style="display: block; margin: 0 auto;">
+         Gestion Formateurs
+        </button>
+        <div class="dropdown-content">
+          <a href="/addFormateur">Nouveau formateur</a>
+          <a href="/listFormateur">Liste formateurs</a>
+        </div>
+      </div>
+      
+      <div class="dropdown">
+        <button class="m-1 btn btn-outline-dark" style="display: block; margin: 0 auto;">
+         Gestion Participants
+        </button>
+        <div class="dropdown-content">
+          <a href="/addParticipant">Nouveau participant</a>
+          <a href="/listParticipant">Liste participants</a>
+        </div>
+      </div>
+      </li>
+  </ul>
+    <ul class="navbar-nav" *ngIf="showAdminBoard" >
+        <li class="nav-item">
+          <div class="dropdown"   >
+            &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;
+           
+           
+           <br>
+          </div>
+      <div class="dropdown"   >
+        <button class="m-1 btn btn-outline-dark" Button [routerLink]="['/listPays']" style="display: block; margin: 0 auto;">
+          Gestion Pays
+        </button>
+      </div>
+      <div class="dropdown">
+        <button class="m-1 btn btn-outline-dark" Button [routerLink]="['/listOrganismes']" style="display: block; margin: 0 auto;">
+          Gestion Organismes
+        </button>
+      </div>
+      <div class="dropdown">
+        <button class="m-1 btn btn-outline-dark" Button [routerLink]="['/listDomaines']" style="display: block; margin: 0 auto;">
+          Gestion Domaines
+        </button>
+      </div>
+      <div class="dropdown">
+        <button class="m-1 btn btn-outline-dark" Button [routerLink]="['/listProfils']" style="display: block; margin: 0 auto;">
+          Gestion Profils
+        </button>
+      </div>
+      <li class="nav-item" *ngIf="showAdminBoard">
+        <button class="m-1 btn " Button 
+        [routerLink]="['/listUsers']">
+         Gestion Utilisateurs
+        </button>
+    
+   </li>
+  </ul>
+</div>
+</nav>
+
+

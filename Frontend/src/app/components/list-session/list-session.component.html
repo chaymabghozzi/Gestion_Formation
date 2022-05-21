@@ -1,0 +1,148 @@
+<div class="container " *ngIf="showUserBoard">
+  <hr class="hr">
+  <h2 class="text-center">Liste des session de formations</h2>
+  <hr class="hr">
+  <br>
+    <div class="form-group">
+        <input type="text" class="form-control" style=" border-left: 5px solid #591a76; border-color: #591a76;" placeholder="Chercher" [(ngModel)]="term">
+    </div>
+    &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;
+  <div class="row">
+    <div class="col-md-4" *ngFor= "let session of sessions| filter:term">
+      <div class="card">
+        <div class="card-body">
+          <img src="../../../../assets/session.png"><br>
+        <br>
+        <p class="card-text"> <b>Lieu :</b> {{session.lieu}}</p>
+        <p class="card-text"> <b>Nombre des participants :</b> {{session.nb_participant}} </p>
+        <p class="card-text"><b>Date debut :</b> {{session.date_debut}} </p>
+        <p class="card-text"><b> Date fin :</b> {{session.date_fin}}  </p>
+        <p class="card-text"><b >Formations :</b> <p class="t" *ngFor="let sess of session.formations; "> {{sess.titre}} </p> 
+        <p class="card-text"><b>Participants :</b> <p class="t" *ngFor="let sess of session.participants; ">{{sess.nom}} {{sess.prenom}} </p>
+          <p class="card-text"><b>Formateur :</b>  <p class="t" *ngFor="let sess of session.participants; ">{{session.prenom}} </p>
+      </div>
+      <div class="card-footer">
+        <div class="row">
+    
+        <div class="edit" (click)="openModal(editSessionModal, session)"> <i class="fa fa-edit" aria-hidden="true"></i>
+        </div>
+        <div class="trash" (click)="supprimer(session.id_formateur, session.id)"> <i class="fa fa-trash"
+            aria-hidden="true"></i>
+        </div>
+      </div>
+   
+    <ng-template #editSessionModal let-modal>
+      <div class="modal-header">
+        <h5 class="modal-title" id="editSessionModal">Modifier Session</h5>
+        <button type="button" class="close" (click)="modal.dismiss()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    
+      <div class="modal-body">
+        <form [formGroup]="editSessionForm" (ngSubmit)="onSubmit(session.id)">
+    
+          <div class="form-row">
+            <div class="form-group  col-6">
+              <label for="lieu" class="lab">Lieu :</label>
+              <input type="text" name="lieu" id="lieu" formControlName="lieu" class="form-control">
+              <div *ngIf="lieu?.touched">
+                <small *ngIf="lieu?.errors?.required" class="text-danger">Ce champ est obligatoire</small>
+              </div>
+            </div>
+            <div class="form-group   col-6">
+              <label for="nb_participant" class="lab">Nombre participants :</label>
+              <input nb_participant="text" name="nb_participant" id="nb_participant" formControlName="nb_participant"
+                class="form-control">
+              <div *ngIf="nb_participant?.touched">
+                <small *ngIf="nb_participant?.errors?.required" class="text-danger">Ce champ est obligatoire</small>
+                <small *ngIf="nb_participant?.errors?.pattern" class="text-danger"> Ce champ est invalide il doit
+                  contenir des chiffres<br></small>
+    
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-6 ">
+              <label for="date_debut" class="lab">Date début :</label>
+              <input type="date" name="date_debut" id="date_debut" formControlName="date_debut" class="form-control">
+              <div *ngIf="date_debut?.touched">
+                <small *ngIf="date_debut?.errors?.required" class="text-danger">Ce champ est obligatoire<br></small>
+              </div>
+            </div>
+            <div class="form-group col-6 ">
+              <label for="date_fin" class="lab">Date fin :</label>
+              <input type="date" name="date_fin" id="date_fin" formControlName="date_fin" class="form-control">
+              <div *ngIf="date_fin?.touched">
+                <small *ngIf="date_fin?.errors?.required" class="text-danger">Ce champ est obligatoire<br></small>
+              </div>
+            </div>
+          </div>
+          <div class="form-group  ">
+            <label for="formateur" class="lab">Formateur :</label>
+            <br>
+            <select class="form-select " name="formateur" id="formateur" formControlName="formateur" class="form-control"
+              (change)="selectChangeHandlerFormateur($event)">
+              <option disabled>Choisir un formateur</option>
+              <option value="{{formateur.id}}" *ngFor="let formateur of formateurs">{{formateur.nom}}
+                {{formateur.prenom}}</option>
+            </select>
+            <div *ngIf="formateur?.touched">
+              <small *ngIf="formateur?.errors?.required" class="text-danger">Ce champ est obligatoire</small>
+            </div>
+          </div>
+          <div class="form-group  ">
+            <label for="formation" class="lab">Formations :</label>
+            <br>
+            <select class="form-select " name="formation" id="formation" formControlName="formation" class="form-control"
+              (change)="selectChangeHandlerFormations($event)" multiple>
+              <option disabled>Choisir un formation</option>
+              <option  *ngFor="let formation of formations;" value="{{formation.id}}">{{formation.titre}}</option>
+    
+            </select>
+            <div *ngIf="formation?.touched">
+              <small *ngIf="formation?.errors?.required" class="text-danger">Ce champ est obligatoire</small>
+            </div>
+          </div>
+          <div class="form-group  ">
+            <label for="participant" class="lab">Participants :</label>
+            <br>
+            <select class="form-select " name="participant" id="participant" formControlName="participant"
+                class="form-control" (change)="selectChangeParticipant($event)" multiple>
+                <option [selected]=true disabled>Choisir un participant</option>
+                <option value="{{participant.id}}" *ngFor="let participant of participants">{{participant.nom}} {{participant.prenom}}</option>
+            </select>
+            <div *ngIf="participant?.touched">
+                <small *ngIf="participant?.errors?.required" class="text-danger">Ce champ est obligatoire</small>
+            </div>
+        </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn2"  [disabled]="!editSessionForm.valid">ENREGISTRER</button>
+            <button type="button" class="btn btn-danger" (click)="modal.dismiss()">FERMER</button>
+          </div>
+        </form>
+      </div>
+    </ng-template>
+  </div>
+  </div>
+</div>
+<div *ngIf="!showUserBoard" >
+  <!-- <app-page404></app-page404> -->
+  
+  <meta http-equiv="refresh" content="0; url=http://localhost:4200/Page404">
+</div>

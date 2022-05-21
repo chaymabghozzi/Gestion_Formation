@@ -1,0 +1,100 @@
+<div class="col"  *ngIf="showUserBoard" >
+    <hr class="hr">
+    <h2 class="text-center">Nouvelle Formation</h2>
+    <hr class="hr">
+    <h3 class="title1">Merci de rensigner ces données.</h3>
+  
+
+<form [formGroup]="addFormationForm" (ngSubmit)="addFormation()" >
+    
+    <div class="form-row">
+        <div class="form-group  col-6">
+            <label for="titre">Titre de formation:</label>
+            <input type="text" name="titre" id="titre" formControlName="titre" class="form-control">
+            <div  *ngIf="titre?.touched">
+                <small *ngIf="titre?.errors?.required" class="text-danger">Ce champ est obligatoire</small> 
+            </div>
+       </div>
+        <div class="form-group   col-6">
+            <label for="nb_session">Nombre de session :</label>
+            <input type="number" name="nb_session" id="nb_session" formControlName="nb_session" class="form-control">
+            <div *ngIf="nb_session?.touched">
+                <small *ngIf="nb_session?.errors?.required" class="text-danger">Ce champ est obligatoire<br></small>
+                <small *ngIf="nb_session?.errors?.pattern" class="text-danger">Ce champ est invalide il doit contenir des chiffres<br></small>
+
+            </div>
+       </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-6 ">
+            <label for="annee">Année :</label>
+            <input type="number" name="annee" id="annee" formControlName="annee" class="form-control">
+            <div *ngIf="annee?.touched">
+                <small *ngIf="annee?.errors?.required" class="text-danger">Ce champ est obligatoire<br></small>
+                <small *ngIf="annee?.errors?.pattern" class="text-danger"> Ce champ  est invalide il doit contenir des chiffres<br></small>
+
+            </div>
+         </div>
+        <div class="form-group col-6 ">
+     
+                <label for="duree">Durée :</label>
+                <input duree="number" name="duree" id="duree" formControlName="duree" class="form-control">
+                <div  *ngIf="duree?.touched">
+                    <small *ngIf="duree?.errors?.required" class="text-danger">Ce champ est obligatoire</small> 
+                    <small *ngIf="duree?.errors?.pattern" class="text-danger"> Ce champ  est invalide il doit contenir des chiffres<br></small>
+    
+                </div>
+            </div>
+       </div>
+    
+    <div class="form-row">
+       <div class="form-group col-6  " >
+            <label for="type">Type :</label>
+            <br>
+            <select class="  form-select " name="type" id="type" formControlName="type" class="form-control" (change)="selectChangeHandler1($event)" >
+                    <option [selected] = true>Choisir un type</option>
+                    <option value="nationale" >Nationale</option>
+                    <option value="internationale" >Internationale</option>
+            </select>
+            <div  *ngIf="type?.touched">
+                    <small *ngIf="type?.errors?.required" class="text-danger">Ce champ est obligatoire</small> 
+            </div>
+       </div>
+       <div class="form-group col-6 ">
+        <label for="budget">Budget :</label>
+        <input type="number" name="budget" id="budget" formControlName="budget" class="form-control">
+        <div *ngIf="budget?.touched">
+            <small *ngIf="budget?.errors?.required" class="text-danger">Ce champ est obligatoire<br></small>
+            <small *ngIf="budget?.errors?.pattern" class="text-danger"> Ce champ  est invalide il doit contenir des chiffres<br></small>
+        </div>
+   </div>
+    </div>   
+       <div class="form-group " >
+            <label for="domaine">Domaine :</label>
+            <br>
+            <select class="form-select "  name="domaine" id="domaine" formControlName="domaine" class="form-control" 
+            (change)="selectChangeHandler($event)" >
+                    <option [selected] = true>Choisir un domaine</option>
+                    <option value="{{domaine.id}}" *ngFor="let domaine of domaines" >{{domaine.libelle}}</option>
+            </select>
+            <div *ngIf="domaine?.touched">
+                    <small *ngIf="domaine?.errors?.required" class="text-danger">Ce champ est obligatoire</small> 
+            </div>
+       </div>
+        <div class="form-group ">
+          
+            <button type="reset"[disabled]=""  class="btn"><b>Annuler </b></button>
+         
+            <button type="submit"  [disabled]="addFormationForm.invalid" class="btn" >Enregistrer </button>  
+           
+            
+        </div>
+</form>
+
+</div>
+
+<div *ngIf="!showUserBoard" >
+    <!-- <app-page404></app-page404> -->
+    
+    <meta http-equiv="refresh" content="0; url=http://localhost:4200/Page404">
+ </div>

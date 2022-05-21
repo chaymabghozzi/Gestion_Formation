@@ -1,0 +1,85 @@
+
+@import "//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css";
+.text-center{
+    color:#ad249b;
+    font-family: "Gill Sans", sans-serif;
+    font-weight: bold;
+}
+
+
+.edit {
+    margin-left: 40%;
+    color: #a185ac;
+    font-size: 20px;  
+   }
+.trash {  
+   margin-left: 8%;
+   color: rgb(218, 143, 143);
+   font-size: 20px;  
+   }
+
+
+   .label {
+    font-weight: bold;
+}
+.text-center{
+    color:#ad249b;
+    font-family: "Gill Sans", sans-serif;
+    font-weight: bold;
+}
+.text{
+    color:#9973a1;
+    font-family: "Gill Sans", sans-serif;
+    font-weight: bold;
+    text-align: center;
+}
+.col{
+    width: 80%;
+    left: 9%;
+    right: 5%;
+    margin-top: 2%;
+}
+
+.btn {
+    margin: 10px;
+    float: right;
+    width: 200px;
+    border-color: #9973a1; 
+    background-color: white ;
+    color: #8b227d;
+
+}
+
+.btn:hover {
+    background-color: #9973a1;
+    color: #8b227d;
+}
+
+.bt2 {
+    margin: 10px;
+    float: right;
+    width: 200px;
+    border-color: #9973a1; 
+    background-color: white ;
+    color: #8b227d;
+}
+.bt2:hover {
+    background-color: #8b227d;
+    color: #ae00ff;
+}
+
+.col-md-6 {
+    left: 25%;
+    right: 25%;
+    margin-top: 150px;
+}
+input {
+    border-left: 5px solid #ae00ff;
+}
+.alert {
+    margin-top:2%;
+}
+
+#type, #organisme, #domaine, input {
+    border-left: 5px solid #ae00ff; 
+}

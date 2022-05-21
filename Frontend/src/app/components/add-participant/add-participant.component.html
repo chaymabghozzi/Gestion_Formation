@@ -1,0 +1,112 @@
+<div class="col" *ngIf="showUserBoard">
+    <hr class="hr">
+    <h2 class="text-center">Nouveau Participant</h2>
+    <hr class="hr">
+    <h3 class="title1">Merci de rensigner ces données.</h3>
+
+    <form [formGroup]="addParticipantForm" (ngSubmit)="addParticipant()">
+
+        <div class="form-row">
+            <div class="form-group  col-6">
+                <label for="nom">Nom :</label>
+                <input type="text" name="nom" id="nom" formControlName="nom" class="form-control">
+                <div *ngIf="nom?.touched">
+                    <small *ngIf="nom?.errors?.required" class="text-danger">Ce champ est obligatoire</small>
+                </div>
+            </div>
+            <div class="form-group   col-6">
+                <label for="prenom">Prénom :</label>
+                <input type="text" name="prenom" id="prenom" formControlName="prenom" class="form-control">
+                <div *ngIf="prenom?.touched">
+                    <small *ngIf="prenom?.errors?.required" class="text-danger">Ce champ est obligatoire</small>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-6 ">
+                <label for="email">E-mail :</label>
+                <input type="email" name="email" id="email" formControlName="email" class="form-control">
+                <div *ngIf="email?.touched && email?.invalid">
+                    <small *ngIf="email?.errors?.required" class="text-danger">Ce champ est obligatoire<br></small>
+                    <small *ngIf="email?.errors?.email" class="text-danger"> L'Email est invalide<br></small>
+                </div>
+            </div>
+            <div class="form-group col-6 ">
+                <label for="tel">Téléphone :</label>
+                <input type="tel" name="tel" id="tel" formControlName="tel" class="form-control">
+                <div *ngIf="tel?.touched && tel?.invalid">
+                    <small *ngIf="tel?.errors?.required" class="text-danger">Ce champ est obligatoire<br></small>
+                    <small *ngIf="tel?.errors?.pattern" class="text-danger"> Le tel est invalide<br></small>
+                    <small *ngIf="tel?.errors?.minlength" class="text-danger">Le tel doit contenir au moins 8
+                        caractères</small>
+                    <small *ngIf="tel?.errors?.maxlength" class="text-danger">Le tel doit contenir au maximum 8
+                        caractères </small>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-6 ">
+                <label for="type">Type de formation:</label>
+                <br>
+                <select class="  form-select " name="type" id="type" formControlName="type" class="form-control"
+                    (change)="selectChangeHandlerType($event)">
+                    <option [selected]=true>Choisir un type de formation</option>
+                    <option value="nationale">Nationale</option>
+                    <option value="internationale">Internationale</option>
+                </select>
+                <div *ngIf="type?.touched">
+                    <small *ngIf="type?.errors?.required" class="text-danger">Ce champ est obligatoire</small>
+                </div>
+            </div>
+            <div class="form-group col-6" *ngIf="type?.value=='nationale'">
+                <label for="organisme">Organisme :</label>
+                <br>
+                <select class="form-select " name="organisme" id="organisme" formControlName="organisme"
+                    class="form-control" (change)="selectChangeHandlerOrganisme($event)">
+                    <option [selected]=true disabled>Choisir un organisme</option>
+                    <option value="{{organisme.id}}" *ngFor="let organisme of organismes">{{organisme.libelle}}</option>
+                </select>
+                <div *ngIf="organisme?.touched">
+                    <small *ngIf="organisme?.errors?.required" class="text-danger">Ce champ est obligatoire</small>
+                </div>
+            </div>
+            <div class="form-group col-6" *ngIf="type?.value=='internationale'">
+                <label for="pays">Pays :</label>
+                <br>
+                <select class="form-select " name="pays" id="pays" formControlName="pays" class="form-control"
+                    (change)="selectChangeHandlerPays($event)">
+                    <option [selected]=true disabled>Choisir un pays</option>
+                    <option value="{{pays.id}}" *ngFor="let pays of allPays">{{pays.nom}}</option>
+                </select>
+                <div *ngIf="pays?.touched">
+                    <small *ngIf="pays?.errors?.required" class="text-danger">Ce champ est obligatoire</small>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="form-group ">
+            <label for="profil">Profil :</label>
+            <br>
+            <select class="form-select " name="profil" id="profil" formControlName="profil" class="form-control"
+                (change)="selectChangeHandlerProfil($event)">
+                <option [selected]=true disabled>Choisir un profil</option>
+                <option value="{{profil.id}}" *ngFor="let profil of profils">{{profil.libelle}}</option>
+            </select>
+            <div *ngIf="profil?.touched">
+                <small *ngIf="profil?.errors?.required" class="text-danger">Ce champ est obligatoire</small>
+            </div>
+        </div>
+
+        <div class="form-group ">
+            <button type="reset"[disabled]=""  class="btn"><b>Annuler</b></button>
+            <button type="submit" [disabled]="addParticipantForm.invalid" class="btn">ENREGISTRER</button>
+        </div>
+    </form>
+
+</div>
+<div *ngIf="!showUserBoard"  >
+    <!-- <app-page404></app-page404> -->
+    
+    <meta http-equiv="refresh" content="0; url=http://localhost:4200/Page404">
+ </div>

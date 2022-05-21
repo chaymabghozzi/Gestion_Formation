@@ -1,0 +1,50 @@
+
+.label {
+    font-weight: bold;
+}
+.text-center{
+    color:#962b96;
+    font-family: "Gill Sans", sans-serif;
+    font-weight: bold;
+}
+.text{
+    color:#08a5d4;
+    font-family: "Gill Sans", sans-serif;
+    font-weight: bold;
+    text-align: center;
+}
+.btn {
+    float: right;
+    width: 150px;
+    border-color: white; 
+   background-color: white ;
+    color: #D682EB;
+}
+.bt2 {
+float: right;
+width: 150px;
+border-color: #D682EB; 
+background-color: white ;
+color: #962b96;
+}
+.bt2:hover {
+background-color: #dfc6e6;
+color: #442557;
+
+}
+  .label {
+      font-weight: bold;
+      color: #962b96;
+  }    
+   
+.col-md-6 {
+    left: 25%;
+    right: 25%;
+    margin-top: 60px;
+    }
+input {
+        border-left: 5px solid #D682EB;
+    }
+.alert {
+        margin-top:2%;
+    }

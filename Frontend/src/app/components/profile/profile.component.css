@@ -1,0 +1,46 @@
+.card{
+    border-color: #9149cc; 
+   
+}    
+
+.text-center {
+    color:#b96ad1;
+    font-family: "Gill Sans", sans-serif;
+    font-weight: bold;
+}
+.username{
+    color: #b96ad1; 
+   
+}
+.col-md-6 {
+   left: 25%;
+    right: 25%;
+    margin-top: 5%;
+}
+.label {
+    color: #9149cc;
+    text-align: center; 
+}
+p {
+    color: #6a506b;
+    text-align: center;  
+}
+img {
+    display: block;
+   margin-left: auto;
+   margin-right: auto;
+   width: 25%;
+   margin-top: 2%;
+}
+.bg-img{
+
+    width: 100%;
+   background-color: #157694;
+   -webkit-background-size: cover;
+   -moz-background-size: cover;
+   -o-background-size: cover;
+   background-size: cover;
+  }
+
+
+

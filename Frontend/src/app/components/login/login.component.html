@@ -1,0 +1,102 @@
+
+   <div class="overlay">
+    <div class="container register">
+      <div class="row">
+        <div *ngIf="!isLoggedIn" class="col-md-3 register-left">
+          <img
+            src="/../../../assets/gif.gif"
+            alt=""
+          />
+          <h4>Vous n'avez pas de compte?</h4>
+          <a [routerLink]="['/register']">
+            <input type="submit" name="" value="Inscrivez vous" /></a
+          ><br />
+        </div>
+        <div class="col-md-9 register-right">
+          <div class="tab-content" id="myTabContent">
+            <div
+              class="tab-pane fade show active"
+              id="home"
+              role="tabpanel"
+              aria-labelledby="home-tab"
+            >
+              <form
+                *ngIf="!isLoggedIn"
+                name="form"
+                (ngSubmit)="f.form.valid && onSubmit()"
+                #f="ngForm"
+                novalidate
+              >
+                <div
+                  class="alert alert-danger"
+                  role="alert"
+                  *ngIf="f.submitted && isLoginFailed"
+                >
+                  Login failed: {{ errorMessage }}
+                </div>
+                <h3 class="register-heading">
+                  CE CONNECTER 
+                </h3>
+                <div class="row register-form">
+                  <div class="col-md-8" style="margin-left: 20%">
+                    <label>Nom d'utilisateur:</label>
+                    <input
+                      name="username"
+                      required
+                      #username="ngModel"
+                      [(ngModel)]="form.username"
+                      type="text"
+                      class="form-control"
+                      placeholder="Votre nom d'utilisateur *"
+                      value=""
+                    />
+                    <div
+                      class="alert-danger"
+                      *ngIf="f.submitted && username.invalid"
+                    >
+                      <div *ngIf="username.errors?.required">
+                        Le nom d'utilisteur est obligatoire.
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="form-group col-md-8"
+                    style="margin-left: 20%; margin-top: 5%"
+                  >
+                    <label>Mot de passe:</label>
+                    <input
+                      name="password"
+                      [(ngModel)]="form.password"
+                      required
+                      #password="ngModel"
+                      type="password"
+                      class="form-control"
+                      placeholder="Votre mot de passe *"
+                      value=""
+                    />
+                    <div
+                      class="alert-danger"
+                      *ngIf="f.submitted && password.invalid"
+                    >
+                      <div *ngIf="password.errors?.required">
+                        Le mot de passe est obligatoire.
+                      </div>
+                    </div>
+                  </div>
+                  <input
+                    [disabled]="f.invalid"
+                    type="submit"
+                    class="btnRegister"
+                    value="Se connecter"
+                  />
+                </div>
+              </form>
+              <div class="alert alert-success" *ngIf="isLoggedIn">
+               
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

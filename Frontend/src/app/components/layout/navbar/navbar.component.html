@@ -1,0 +1,37 @@
+<nav class="navbar navbar-expand-sm  navbark-dark ">
+  <img src="/../../../assets/logonvbar.png" class="im">
+<ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
+ 
+
+   <li class="nav-item">
+    <button class="m-1 btn " Button 
+    [routerLink]="['/login']">
+      Se connecter
+    </button>
+   </li>
+  <li class="nav-item">
+    <button class="m-1 btn" Button 
+    [routerLink]="['/register']">
+      S'inscrire
+    </button>
+  </li>
+</ul>
+
+<ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
+
+  <li class="nav-item">
+   <button class="m-1 btn " Button 
+   [routerLink]="['/profile']">
+     {{username}}
+   </button>
+  </li>
+
+ <li class="nav-item">
+   <button class="m-1 btn " Button 
+   (click)="logout()" [routerLink]= "['/login']">
+     Se déconnecter
+   </button>
+ </li>
+</ul>
+</nav>
+

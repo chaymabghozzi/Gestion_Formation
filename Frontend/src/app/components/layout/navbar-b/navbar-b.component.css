@@ -1,0 +1,77 @@
+.navbar {
+    background-color: rgb(238, 213, 238);
+}
+
+.title{
+    font-weight: bold;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 30px;
+    color: #ad249b;
+}
+.title2 {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 15px;
+    text-align: center;
+    color: #9973a1;
+    font-weight: bold;
+}
+.nav-item{
+  margin: -50px auto 50;
+  display: block;
+  display: inline-block;
+ 
+}
+.btn {
+  margin:3px;
+
+  align-items: center;
+  justify-content: center;
+  border: 3px solid rgb(204, 51, 204);
+ 
+  text-align: center;
+  
+    display: inline-block;
+    margin: -50px auto 50;
+    color: #9973a1;
+    border-color: #ffffff; 
+}
+.btn:hover{background-color: #ad249b; color:white; }
+
+  /* The container <div> - needed to position the dropdown content */
+  .dropdown {
+    display: block;
+    display: inline-block;
+    text-align: center;
+    position: relative;
+    display: inline-block;
+  }
+  
+  /* Dropdown Content (Hidden by Default) */
+  .dropdown-content {
+    
+    display: none;
+    position: absolute;
+    text-align: center;
+    background-color: whitesmoke;
+    min-width: 180px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  /* Links inside the dropdown */
+  .dropdown-content a {
+    color: #9973a1;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  /* Change color of dropdown links on hover */
+  .dropdown-content a:hover {background-color: rgb(208, 184, 218);  color: #9973a1;}
+  
+  /* Show the dropdown menu on hover */
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+ 
+

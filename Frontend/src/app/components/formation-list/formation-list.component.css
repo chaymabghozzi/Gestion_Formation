@@ -1,0 +1,183 @@
+  
+@import "//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css";
+.card {
+    
+    margin-top: -30px;
+    border-color: #9e269e;
+    
+}
+.styled {
+    border: 0;
+    line-height: 2.5;
+    padding: 0 20px;
+    font-size: 1rem;
+    text-align: center;
+    color: #fff;
+    text-shadow: 1px 1px 1px #000;
+    border-radius: 10px;
+    background-color: rgb(220, 0, 220);
+    background-image: linear-gradient(to top left,
+                                      rgba(0, 0, 0, .2),
+                                      rgba(0, 0, 0, .2) 30%,
+                                      rgba(0, 0, 0, 0));
+    box-shadow: inset 2px 2px 3px rgba(255, 255, 255, .6),
+                inset -2px -2px 3px rgba(0, 0, 0, .6);
+}
+
+.styled:hover {
+    background-color: rgb(220, 0, 220);
+}
+
+.styled:active {
+    box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6),
+                inset 2px 2px 3px rgba(0, 0, 0, .6);
+}
+
+p {
+    color: #711675;
+    text-align: center;  
+}
+img {
+    display: block;
+   margin-left: auto;
+   margin-right: auto;
+   width: 50%;
+}
+h5 {
+    text-align: center;
+}
+
+.edit {
+ margin-left: 40%;
+ color: #a185ac;
+ font-size: 32px;  
+}
+.trash {  
+margin-left: 8%;
+color: rgb(218, 143, 143);
+font-size: 30px;  
+}
+.col {
+    align-content: center; 
+    padding: 50px 30px 30px 10px; 
+}
+
+.card-title {
+    color: #a56ea5 ;
+    font-family: "Gill Sans", sans-serif;
+    font-weight: bold;
+    
+}
+.card-text {
+    text-align: center;
+}
+
+.text-center {
+    color: #1A5276 ;
+    font-family: "Gill Sans", sans-serif;
+    font-weight: bold;
+}
+
+.modal-title {
+    color: #f5bf69 ;
+    font-family: "Gill Sans", sans-serif;
+    font-weight: bold;
+}
+.lab {
+    color: #1A5276 ;
+    font-family: "Gill Sans", sans-serif;
+    font-weight: bold;
+}
+
+.modal-footer {
+   
+    height: 100%;
+    width: 100%;
+}
+
+.btn1 {
+    float: right;
+    width: 150px;
+    border-color: #ffc727; 
+    background-color: white ;
+    color: #1A5276;
+  }
+.btn1:hover {
+    background-color: #1A5276;
+    color: #ffc727;
+}
+.t{
+    color:black;
+    margin-left: 9%;
+}
+
+.label {
+    font-weight: bold;
+}
+.text-center{
+    color:#ad249b;
+    font-family: "Gill Sans", sans-serif;
+    font-weight: bold;
+}
+.text{
+    color:#9973a1;
+    font-family: "Gill Sans", sans-serif;
+    font-weight: bold;
+    text-align: center;
+}
+.col{
+    width: 80%;
+    left: 5%;
+    right: 5%;
+    margin-top: 2%;
+}
+.title1{
+   font-size: large;
+   font-weight: bold;
+   text-align: center;
+   color: #55194d; 
+}
+
+.btn {
+    margin: 10px;
+    float: right;
+    width: 150px;
+    border-color: #9973a1; 
+    background-color: #9973a1 ;
+    color: white;
+
+}
+
+.btn:hover {
+    background-color: white;
+    color: #8b227d;
+}
+
+.bt2 {
+    margin: 10px;
+    float: right;
+    width: 150px;
+    border-color: #9973a1; 
+    background-color: white ;
+    color: #8b227d;
+}
+.bt2:hover {
+    background-color: #8b227d;
+    color: #ae00ff;
+}
+
+.col-md-6 {
+    left: 25%;
+    right: 25%;
+    margin-top: 150px;
+}
+input {
+    border-left: 5px solid #ae00ff;
+}
+.alert {
+    margin-top:2%;
+}
+
+#type, #organisme, #domaine, input {
+    border-left: 5px solid #ae00ff; 
+}

@@ -1,0 +1,26 @@
+
+
+<div class="col-md-6" *ngIf="currentUser"  >
+    <div class="card">
+       <img src="../../../../assets/profil.gif">
+     <h3 class="text-center">
+      <strong class="username">{{ currentUser.username }}</strong> 
+     </h3>
+     <br>
+     <strong class="label">Nom :</strong>
+      <p>{{User.nom}}</p>
+      
+     <strong class="label">Prénom :</strong>
+     <p>{{User.prenom}}</p>
+   
+     <strong class="label">E-Mail :</strong>
+    <p>{{User.email}}</p> 
+    <strong class="label" >Rôles :</strong>
+    <p *ngFor="let role of currentUser.roles">{{role}}</p> 
+    </div>
+    <div *ngIf="!isLoggedIn" >
+      <!-- <app-page404></app-page404> -->
+      
+      <meta http-equiv="refresh" content="0; url=http://localhost:4200/Page404">
+    </div>
+  

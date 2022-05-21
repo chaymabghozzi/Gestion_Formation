@@ -1,0 +1,100 @@
+<div class="col-md-6" *ngIf="showAdminBoard">
+    <hr class="hr">
+    <h2 class="text-center">Liste des organismes</h2>
+    <hr class="hr">
+    <button class="btn bt" (click)="openModalAddOrganisme(addOrganismeModal)">Nouveau Organisme</button>
+    <br><br>
+    <div class="form-group">
+        <input type="text" style=" border-left: 5px solid #88228b; border-color: #97269b;" style=" border-left: 5px solid #97269b; border-color: #97269b;" class="form-control" placeholder="Chercher" [(ngModel)]="term">
+    </div>
+
+        <ng-template #addOrganismeModal let-modal>
+            <div class="modal-header">
+                <h5 class="modal-title" id="addOrganismeModal">Ajouter Organisme</h5>
+                <button type="button" class="close" (click)="modal.dismiss()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <form [formGroup]="addOrganismeForm" (ngSubmit)="addOrganisme()">
+                    <div class="form-row">
+                        <div class="form-group  col-6">
+                            <label for="libelle" class="lab">Libelle :</label>
+                            <input type="text" name="libelle" id="libelle" formControlName="libelle"
+                                class="form-control">
+                            <div *ngIf="libelle?.touched">
+                                <small *ngIf="libelle?.errors?.required" class="text-danger">Ce champ est
+                                    obligatoire</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-danger"
+                            [disabled]="addOrganismeForm.invalid">Enregistrer</button>
+                        <button type="button" (click)="modal.dismiss()" class="btn btn-danger">Fermer</button>
+                    </div>
+                </form>
+            </div>
+        </ng-template>
+        <table class="table" id="tab">
+            <thead class="head">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nom</th>
+                    <td scope="col"></td>
+                    <td scope="col"></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let organisme of organismes| filter:term">
+                    <th>{{organisme.id}}</th>
+                    <td>{{organisme.libelle}}</td>
+                    <td>
+                        <div class="edit" (click)="openModal(editOrganismeModal, organisme)"> <i class="fa fa-edit"
+                                aria-hidden="true"></i></div>
+                    </td>
+                    <td>
+                        <div class="trash" (click)="supprimer(organisme.id)"> <i class="fa fa-trash"
+                                aria-hidden="true"></i>
+                        </div>
+                    </td>
+                    <ng-template #editOrganismeModal let-modal>
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="editOrganismeModal">MODIFIER ORGANISME</h5>
+                            <button type="button" class="close" (click)="modal.dismiss()" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+                        <div class="modal-body">
+                            <form [formGroup]="editOrganismeForm" (ngSubmit)="editOrganisme(organisme.id)">
+                                <div class="form-row">
+                                    <div class="form-group  col-6">
+                                        <label for="libelle" class="lab">Libelle :</label>
+                                        <input type="text" name="libelle" id="libelle" formControlName="libelle"
+                                            class="form-control">
+                                        <div *ngIf="libelle?.touched">
+                                            <small *ngIf="libelle?.errors?.required" class="text-danger">Ce champ est
+                                                obligatoire</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn2" [disabled]="!editOrganismeForm.valid">ENREGISTRER</button>
+                                    <button type="button" (click)="modal.dismiss()"
+                                        class="btn btn-danger">FERMER</button>
+                                </div>
+                            </form>
+                        </div>
+                    </ng-template>
+                </tr>
+            </tbody>
+        </table>
+</div>
+
+<div *ngIf="!showAdminBoard">
+    <!-- <app-page404></app-page404> -->
+
+    <meta http-equiv="refresh" content="0; url=http://localhost:4200/Page404">
+</div>

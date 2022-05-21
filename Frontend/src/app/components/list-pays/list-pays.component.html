@@ -1,0 +1,96 @@
+<div class="col-md-6" *ngIf="showAdminBoard" >
+    <div class="our-culture">
+        <hr class="hr">
+        <h2 class="text-center">Liste des pays </h2>
+        <hr class="hr">
+        <br>
+        <div class="form-group">
+    <button class="btn bt" (click)="openModalAddPays(addPaysModal)">Nouveau pays</button>
+    <br><br>
+    <div class="form-group">
+        <input type="text" style=" border-left: 5px solid #731a76; border-color: #731a76;" class="form-control" placeholder="Chercher" [(ngModel)]="term">
+    </div>
+    <ng-template #addPaysModal let-modal>
+        <div class="modal-header">
+            <h5 class="modal-title" id="addPaysModal">Ajouter pays</h5>
+            <button type="button" class="close" (click)="modal.dismiss()" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+        <div class="modal-body">
+            <form [formGroup]="addPaysForm" (ngSubmit)="addPays()">
+                <div class="form-row">
+                    <div class="form-group  col-6">
+                        <label for="nom" class="lab">Nom :</label>
+                        <input type="text" name="nom" id="nom" formControlName="nom" class="form-control">
+                        <div *ngIf="nom?.touched">
+                            <small *ngIf="nom?.errors?.required" class="text-danger">Ce champ est
+                                obligatoire</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn2" [disabled]="addPaysForm.invalid">Enregistrer</button>
+                    <button type="button" class="btn btn-danger" (click)="modal.dismiss()">Fermer</button>
+                </div>
+            </form>
+        </div>
+    </ng-template>
+    <table class="table" id="tab">
+        <thead class="head">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nom</th>
+                <td scope="col"></td>
+                <td scope="col"></td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let pays of allPays| filter:term">
+                <th>{{pays.id}}</th>
+                <td>{{pays.nom}}</td>
+                <td>
+                    <div class="edit" (click)="openModalEdit(editPaysModal, pays)"> <i class="fa fa-edit"
+                            aria-hidden="true"></i></div>
+                </td>
+                <td>
+                    <div class="trash" (click)="supprimerPays(pays.id)"> <i class="fa fa-trash" aria-hidden="true"></i>
+                    </div>
+                </td>
+                <ng-template #editPaysModal let-modal>
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editPaysModal">Modifier Pays</h5>
+                        <button type="button" class="close" (click)="modal.dismiss()" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        <form [formGroup]="editPaysForm" (ngSubmit)="editPays(pays.id)">
+                            <div class="form-row">
+                                <div class="form-group  col-6">
+                                    <label for="nom" class="lab">Nom :</label>
+                                    <input type="text" name="nom" id="nom" formControlName="nom" class="form-control">
+                                    <div *ngIf="nom?.touched">
+                                        <small *ngIf="nom?.errors?.required" class="text-danger">Ce champ est
+                                            obligatoire</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-danger2"  [disabled]="!editPaysForm.valid">Enregistrer</button>
+                                <button type="button" (click)="modal.dismiss()" class="btn btn-danger">Fermer</button>
+                            </div>
+                        </form>
+                    </div>
+                </ng-template>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div *ngIf="!showAdminBoard" >
+        <!-- <app-page404></app-page404> -->
+        
+        <meta http-equiv="refresh" content="0; url=http://localhost:4200/Page404">
+ </div>

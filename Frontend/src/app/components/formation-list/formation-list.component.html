@@ -1,0 +1,162 @@
+<div class="container " *ngIf="showUserBoard">
+  <hr class="hr">
+  <h2 class="text-center">Liste des formation   </h2>
+  <hr class="hr">
+  <br>
+    <div class="form-group">
+        <input type="text" class="form-control" style=" border-left: 5px solid #591a76; border-color: #591a76;" placeholder="Chercher" [(ngModel)]="term">
+    </div>
+    <button class="btn bt"
+        type="button" [routerLink]="['/domaines']">
+    Domaines
+</button>
+  <div class="row">
+   
+         &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;<br><br> <br> 
+          <div class="row">
+
+            <div *ngFor="let formation of formations | filter:term">
+              <div class="card">
+                <div class="card-body">
+                  <img src="../../../../assets/logo2.png"><br>
+                  <h4 class="text-center">{{formation.titre}}</h4>
+                  <br>
+                  <h5 class="card-title">Type : {{formation.type}}</h5>
+                  <p class="card-text"> <b>Durée </b> {{formation.duree}}</p>
+                  <p class="card-text"> <b>Nombre sessions :</b> {{formation.nb_session}} </p>
+                  <p class="card-text"><b>Année :</b> {{formation.annee}} </p>
+                  <p class="card-text"><b> Budget :</b> {{formation.budget}} </p>
+                </div>
+                <div class="card-footer">
+                  <div class="row">
+                 
+          
+                    <div class="edit" (click)="openModal(editFormationModal, formation)"> <i class="fa fa-edit"
+                        aria-hidden="true"></i></div>
+                    <div (click)="supprimer(formation.id)" class="trash"> <i class="fa fa-trash" aria-hidden="true"></i>
+                    </div>
+                  </div>
+
+                </div>
+                <ng-template #editFormationModal let-modal>
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="editFormationModal">Modifier Formation</h5>
+                    <button type="button" class="close" (click)="modal.dismiss()" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+
+                  <div class="modal-body">
+                    <form [formGroup]="editFormationForm" (ngSubmit)="onSubmit(formation.id)">
+                      <div class="form-row">
+                        <div class="form-group  col-6">
+                          <label for="titre" class="lab" >Titre :</label>
+                          <input type="text" name="titre" id="titre" formControlName="titre" class="form-control">
+                          <div *ngIf="titre?.touched">
+                            <small *ngIf="titre?.errors?.required" class="text-danger">Ce champ est obligatoire</small>
+                          </div>
+                        </div>
+                        <div class="form-group   col-6">
+                          <label for="duree"  class="lab">Durée :</label>
+                          <input duree="text" name="duree" id="duree" formControlName="duree" class="form-control">
+                          <div *ngIf="duree?.touched">
+                            <small *ngIf="duree?.errors?.required" class="text-danger">Ce champ est obligatoire</small>
+                            <small *ngIf="duree?.errors?.pattern" class="text-danger"> Ce champ est invalide il doit
+                              contenir des chiffres<br></small>
+
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-row">
+                        <div class="form-group col-6 ">
+                          <label for="annee"  class="lab">Année :</label>
+                          <input type="text" name="annee" id="annee" formControlName="annee" class="form-control">
+                          <div *ngIf="annee?.touched">
+                            <small *ngIf="annee?.errors?.required" class="text-danger">Ce champ est
+                              obligatoire<br></small>
+                            <small *ngIf="annee?.errors?.pattern" class="text-danger"> Ce champ est invalide il doit
+                              contenir des chiffres<br></small>
+
+                          </div>
+                        </div>
+                        <div class="form-group col-6 ">
+                          <label for="nb_session"  class="lab">Nombre de session :</label>
+                          <input type="text" name="nb_session" id="nb_session" formControlName="nb_session"
+                            class="form-control">
+                          <div *ngIf="nb_session?.touched">
+                            <small *ngIf="nb_session?.errors?.required" class="text-danger">Ce champ est
+                              obligatoire<br></small>
+                            <small *ngIf="nb_session?.errors?.pattern" class="text-danger">Ce champ est invalide il doit
+                              contenir des chiffres<br></small>
+
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-row">
+                        <div class="form-group col-6  ">
+                          <label for="type"  class="lab">Type :</label>
+                          <br>
+                          <select class="form-select" name="type" id="type" formControlName="type" class="form-control"
+                            (change)="selectChangeHandlerType($event)">
+                            <option disabled>Choisir un type</option>
+                            <option value="nationale">Nationale</option>
+                            <option value="internationale">Internationale</option>
+                          </select>
+                          <div *ngIf="type?.touched">
+                            <small *ngIf="type?.errors?.required" class="text-danger">Ce champ est obligatoire</small>
+                          </div>
+                        </div>
+                        <div class="form-group col-6 ">
+                          <label for="budget"  class="lab">Budget :</label> 
+                          <input type="text" name="budget" id="budget" formControlName="budget" class="form-control">
+                          <div *ngIf="budget?.touched">
+                            <small *ngIf="budget?.errors?.required" class="text-danger">Ce champ est
+                              obligatoire<br></small>
+                            <small *ngIf="budget?.errors?.pattern" class="text-danger"> Ce champ est invalide il doit
+                              contenir des chiffres<br></small>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group ">
+                        <label for="domaine" class="lab">Domaine :</label>
+                        <br>
+                        <select class="form-select " name="domaine" id="domaine" formControlName="domaine"
+                          class="form-control" (change)="selectChangeHandlerDomaine($event)">
+                          <option disabled>Choisir un domaine</option>
+                          <option value="{{domaine.id}}" *ngFor="let domaine of domaines">{{domaine.libelle}}</option>
+                        </select>
+                        <div *ngIf="domaine?.touched">
+                          <small *ngIf="domaine?.errors?.required" class="text-danger">Ce champ est obligatoire</small>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="submit" class="btn btn2" [disabled]= "!editFormationForm.valid">Enregistrer</button>
+                        <button type="button" class="btn btn-danger" (click)="modal.dismiss()">Fermer</button>
+                      </div>
+                    </form>
+                  </div>
+                </ng-template>
+              </div>
+            </div>
+          </div>
+    </div>
+  </div>
+  <div *ngIf="!showUserBoard" >
+    <!-- <app-page404></app-page404> -->
+    
+    <meta http-equiv="refresh" content="0; url=http://localhost:4200/Page404">
+ </div>
