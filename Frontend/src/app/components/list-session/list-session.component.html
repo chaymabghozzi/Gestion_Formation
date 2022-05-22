@@ -34,7 +34,7 @@
         <p class="card-text"><b> Date fin :</b> {{session.date_fin}}  </p>
         <p class="card-text"><b >Formations :</b> <p class="t" *ngFor="let sess of session.formations; "> {{sess.titre}} </p> 
         <p class="card-text"><b>Participants :</b> <p class="t" *ngFor="let sess of session.participants; ">{{sess.nom}} {{sess.prenom}} </p>
-          <p class="card-text"><b>Formateur :</b>  <p class="t" *ngFor="let sess of session.participants; ">{{session.prenom}} </p>
+          <p class="card-text"><b>Formateur :</b>  <p class="t">{{session.prenom}} {{session.nom}} </p>
       </div>
       <div class="card-footer">
         <div class="row">
@@ -45,7 +45,10 @@
             aria-hidden="true"></i>
         </div>
       </div>
-   
+   <br>
+   <br>
+   <br>
+   <br>
     <ng-template #editSessionModal let-modal>
       <div class="modal-header">
         <h5 class="modal-title" id="editSessionModal">Modifier Session</h5>
@@ -132,8 +135,8 @@
             </div>
         </div>
           <div class="modal-footer">
-            <button type="submit" class="btn btn2"  [disabled]="!editSessionForm.valid">ENREGISTRER</button>
-            <button type="button" class="btn btn-danger" (click)="modal.dismiss()">FERMER</button>
+            <button type="submit" class="btn btn2"  [disabled]="!editSessionForm.valid">Enregistrer</button>
+            <button type="button" class="btn btn-danger" (click)="modal.dismiss()">Fermer</button>
           </div>
         </form>
       </div>

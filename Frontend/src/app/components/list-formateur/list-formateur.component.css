@@ -44,40 +44,7 @@ font-size: 30px;
     text-align: center;
 }
 
-.text-center {
-    color: #1A5276 ;
-    font-family: "Gill Sans", sans-serif;
-    font-weight: bold;
-}
 
-.modal-title {
-    color: #f5bf69 ;
-    font-family: "Gill Sans", sans-serif;
-    font-weight: bold;
-}
-.lab {
-    color: #1A5276 ;
-    font-family: "Gill Sans", sans-serif;
-    font-weight: bold;
-}
-
-.modal-footer {
-   
-    height: 100%;
-    width: 100%;
-}
-
-.btn1 {
-    float: right;
-    width: 150px;
-    border-color: #ffc727; 
-    background-color: white ;
-    color: #1A5276;
-  }
-.btn1:hover {
-    background-color: #1A5276;
-    color: #ffc727;
-}
 .t{
     color:black;
     margin-left: 9%;

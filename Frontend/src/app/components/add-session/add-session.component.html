@@ -70,12 +70,22 @@
                 <small *ngIf="formation?.errors?.required" class="text-danger">Ce champ est obligatoire</small>
             </div>
         </div>
-        <div class="form-group  ">
-         
-            <div *ngIf="participant?.touched">
-                <small *ngIf="participant?.errors?.required" class="text-danger">Ce champ est obligatoire</small>
+   
+            <div class="form-group  ">
+                <label for="participant">Participants :</label>
+                <br>
+                <select class="form-select " name="participant" id="participant" formControlName="participant"
+                    class="form-control" (change)="selectChangeParticipant($event)" multiple >
+                    <option [selected]=true>Choisir un participant</option>
+                    <option value="{{participant.id}}" *ngFor="let participant of participants">{{participant.nom}} {{participant.prenom}}</option>
+                </select>
+                <div *ngIf="participant?.touched">
+                    <small *ngIf="participant?.errors?.required" class="text-danger">Ce champ est obligatoire</small>
+                </div>
             </div>
-        </div>
+         
+       
+        
     
         <div class="form-group ">
             <button type="reset"[disabled]=""  class="btn"><b>Annuler </b></button>
